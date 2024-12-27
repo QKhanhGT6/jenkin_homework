@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
-    stage('Cleanup') {
-        steps {
-            sh 'pkill -f "uvicorn main:app" || true'
-        }
-    }
-
     stages {
+        stage('Cleanup') {
+            steps {
+                sh 'pkill -f "uvicorn main:app" || true'
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
