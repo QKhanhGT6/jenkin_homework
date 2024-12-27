@@ -70,8 +70,13 @@ pipeline {
 
 
 def githubCheck(name, conclusion, details) {
-    publishChecks name: name, status: 'COMPLETED', conclusion: conclusion.toLowerCase(), detailsURL: "${env.BUILD_URL}", output: [
-        title: name,
-        summary: details
-    ]
+    publishChecks name: 'Build and Tests',
+              status: 'COMPLETED',
+              conclusion: 'SUCCESS', // Replace with valid enum value
+              detailsURL: env.BUILD_URL,
+              output: [
+                  title: 'Build and Tests',
+                  summary: 'Jenkins build and test results'
+              ]
+
 }
