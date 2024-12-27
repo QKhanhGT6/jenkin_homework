@@ -6,7 +6,7 @@ app = FastAPI()
 def get_version():
     return {"version": "1.0.0"}
 
-@app.get("/is_prime/{number}")
+@app.get("/check_prime")
 def check_prime(number: int):
     if number < 2:
         return {"number": number, "is_prime": False}
