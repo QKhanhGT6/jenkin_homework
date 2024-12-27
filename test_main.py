@@ -46,7 +46,7 @@ def test_check_prime_large_prime():
 def test_check_prime_large_non_prime():
     response = client.get("/check_prime?number=100")
     assert response.status_code == 200
-    assert response.json() == {"number": -101, "is_prime": False}
+    assert response.json() == {"number": 100, "is_prime": False}
 
 def test_check_prime_float():
     response = client.get("/check_prime?number=10.5")
