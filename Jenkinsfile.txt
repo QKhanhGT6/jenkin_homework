@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    stage('Cleanup') {
+        steps {
+            sh 'pkill -f "uvicorn main:app" || true'
+        }
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -11,9 +17,9 @@ pipeline {
         stage('Set Up Virtual Environment') {
             steps {
                 sh '''
-                python3 -m venv venv
+                python3 -m venv venv || true
                 . venv/bin/activate
-                pip install --upgrade pip
+                pip install --upgrade pip || true
                 '''
             }
         }
