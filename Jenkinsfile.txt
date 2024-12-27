@@ -8,21 +8,40 @@ pipeline {
             }
         }
         
+        stage('Set Up Virtual Environment') {
+            steps {
+                sh '''
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install --upgrade pip
+                '''
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh '''
+                . venv/bin/activate
+                pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest --junitxml=test-results.xml'
+                sh '''
+                . venv/bin/activate
+                pytest --junitxml=test-results.xml
+                '''
             }
         }
 
         stage('Run Application') {
             steps {
-                sh 'uvicorn main:app --host 0.0.0.0 --port 8000 &'
+                sh '''
+                . venv/bin/activate
+                nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
+                '''
             }
         }
     }
