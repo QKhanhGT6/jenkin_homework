@@ -53,6 +53,12 @@ pipeline {
     }
 
     post {
+        always {
+            // Publish results to GitHub Checks
+            script {
+                githubCheck 'Build and Tests', currentBuild.result, 'Jenkins build and test results'
+            }
+        }
         success {
             echo 'Build and tests succeeded.'
         }
@@ -60,4 +66,12 @@ pipeline {
             echo 'Build or tests failed.'
         }
     }
+}
+
+
+def githubCheck(name, conclusion, details) {
+    publishChecks name: name, status: 'COMPLETED', conclusion: conclusion.toLowerCase(), detailsURL: "${env.BUILD_URL}", output: [
+        title: name,
+        summary: details
+    ]
 }
