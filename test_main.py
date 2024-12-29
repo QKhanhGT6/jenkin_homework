@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 from main import app
 
+# test comment
 client = TestClient(app)
 
 def test_get_version():
