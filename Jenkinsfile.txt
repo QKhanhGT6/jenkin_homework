@@ -4,7 +4,7 @@ pipeline {
     environment {
         REPO_URL = 'https://github.com/QKhanhGT6/jenkin_homework.git'
         VENV_DIR = 'venv'
-        GITHUB_CREDENTIALS_ID = 'githubPAT'  // ID of the credentials you added
+        GITHUB_CREDENTIALS_ID = 'githubPAT'  // ID of the credentials you add
     }
 
     stages {
