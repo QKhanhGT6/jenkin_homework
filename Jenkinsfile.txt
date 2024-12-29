@@ -4,6 +4,7 @@ pipeline {
     environment {
         REPO_URL = 'https://github.com/QKhanhGT6/jenkin_homework.git'
         VENV_DIR = 'venv'
+        GITHUB_CREDENTIALS_ID = 'githubPAT'  // ID of the credentials you added
     }
 
     stages {
@@ -24,8 +25,7 @@ pipeline {
             steps {
                 withChecks('Checkout') {
                     publishChecks name: 'Checkout', status: 'IN_PROGRESS', summary: 'Checking out the repository.'
-                    // Explicitly checkout the repository
-                    git branch: 'main', url: env.REPO_URL
+                    git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: env.REPO_URL
                     publishChecks name: 'Checkout', status: 'COMPLETED', conclusion: 'SUCCESS', summary: 'Repository checked out successfully.'
                 }
             }
