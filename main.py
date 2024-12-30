@@ -7,7 +7,7 @@ def get_version():
     return {"version": "1.0.0"}
 
 @app.get("/check_prime")
-# test Jenkin auto run comment :D
+# -> test Jenkin auto run comment :D
 def check_prime(number: int):
     if number < 2:
         return {"number": number, "is_prime": False}
