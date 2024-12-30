@@ -2,9 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REPO_URL = 'https://github.com/QKhanhGT6/jenkin_homework.git'
         VENV_DIR = 'venv'
-        GITHUB_CREDENTIALS_ID = 'githubPAT'  // ID of the credentials you add
     }
 
     stages {
@@ -17,16 +15,6 @@ pipeline {
                         sh 'pkill -f "uvicorn main:app" || true'
                     }
                     publishChecks name: 'Cleanup', status: 'COMPLETED', conclusion: 'SUCCESS', summary: 'Cleanup completed successfully.'
-                }
-            }
-        }
-
-        stage('Checkout') {
-            steps {
-                withChecks('Checkout') {
-                    publishChecks name: 'Checkout', status: 'IN_PROGRESS', summary: 'Checking out the repository.'
-                    git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: env.REPO_URL
-                    publishChecks name: 'Checkout', status: 'COMPLETED', conclusion: 'SUCCESS', summary: 'Repository checked out successfully.'
                 }
             }
         }
